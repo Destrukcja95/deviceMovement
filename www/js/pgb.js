@@ -4,43 +4,22 @@ function init() {
 
 function onDeviceReady() {
 	navigator.notification.beep(1);
-}
-
-function deviceInfo() {
-
-	info =  'Hi, I am your smartphone :-)' + '\n' +
-			'=====' + '\n' +
-			'Device Name    : '     + device.name     + '\n' + 
-			'Device Cordova : '  + device.cordova + '\n' + 
-			'Device Platform: ' + device.platform + '\n' + 
-			'Device UUID    : '     + device.uuid     + '\n' + 
-			'Device Model   : '    + device.model     + '\n' + 
-			'Device Version : '  + device.version  + '\n';
-
-	navigator.notification.alert(info);
 	
-}
+	function onSuccess(acceleration) {
+		navigator.notification.alert('Acceleration X: ' + acceleration.x + '\n' +
+			'Acceleration Y: ' + acceleration.y + '\n' +
+			'Acceleration Z: ' + acceleration.z + '\n' +
+			'Timestamp: ' + acceleration.timestamp + '\n');
+	}
 
-function myInformation() {
+	function onError() {
+		navigator.notification.alert('onError!');
+	}
 
-	information =  'Hi, I am Kamil Roganowicz :-)' + '\n' +
-			'=====' + '\n' +
-			'My Name Kamil  ' + '\n' + 
-			'My Last Name: Roganowicz ' + '\n';
+	var options = {
+		frequency: 1000
+	};
 
-	navigator.notification.alert(information);
-	
+	var watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
 }
-
-function onSuccess(acceleration) {
-    alert('Acceleration X: ' + acceleration.x + '\n' +
-          'Acceleration Y: ' + acceleration.y + '\n' +
-          'Acceleration Z: ' + acceleration.z + '\n' +
-          'Timestamp: '      + acceleration.timestamp + '\n');
-}
-function onError() {
-    alert('onError!');
-}
-var options = { frequency: 3000 };  // Update every 3 seconds
-var watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
 
