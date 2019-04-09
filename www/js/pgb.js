@@ -17,7 +17,7 @@ function onDeviceReady() {
 	}
 
 	var options = {
-		frequency: 1000
+		frequency: 10000
 	};
 
 	var watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
